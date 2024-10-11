@@ -1,0 +1,12 @@
+const { addRole, activeRole, editRole, getOneRole, getAllRole, removeRole } = require('../controller/role/role.controller')
+const express = require('express')
+const { singleUpload } = require('../middleware/upload')
+const router = express.Router()
+router.post('/addRole', singleUpload, addRole)
+// router.get('/paginationRole', paginationRole)
+router.patch('/activeRole/:_id', activeRole)
+router.post('/editRole', singleUpload, editRole)
+router.get('/getOneRole/:_id', getOneRole)
+router.get('/getAllRole', getAllRole)
+router.patch('/removeRole/:_id', removeRole)
+module.exports = router
