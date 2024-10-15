@@ -2,7 +2,7 @@ const { studentModel } = require(`../../model/student.model`)
 const { adminModel } = require('../../model/admin.model')
 const { enrollmentModel } = require('../../model/enrollment.model')
 const { generateStudentToken, parseJwt } = require('../../middleware/auth')
-const secret_key = process.env.TOKEN_KEY
+const secret_key = "mysecretkey"
 const nodemailer = require('nodemailer')
 
 

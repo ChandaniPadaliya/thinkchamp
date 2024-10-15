@@ -1,6 +1,7 @@
 const { adminModel } = require('../../model/admin.model')
 const { generateAdminToken, verifyAdminToken } = require('../../middleware/auth')
-const secret_key = process.env.TOKEN_KEY
+// const secret_key = process.env.TOKEN_KEY
+const secret_key="mysecretkey"
 const nodemailer = require('nodemailer')
 
 

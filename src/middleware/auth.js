@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
-const secret_key = process.env.TOKEN_KEY
+// const secret_key = process.env.TOKEN_KEY
+const secret_key="mysecretkey"
 
 exports.parseJwt = (data) => {
     try {

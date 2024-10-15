@@ -3,7 +3,8 @@ module.exports = function () {
   // Configuring the database
   mongoose.Promise = global.Promise;
 
-  let URL = process.env.DataBase;
+  // let URL = process.env.DataBase;
+  let URL = "mongodb+srv://admin:admin123@think.h3k10.mongodb.net/"
 
   mongoose.set("strictQuery", false);
 

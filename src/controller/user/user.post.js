@@ -1,6 +1,6 @@
 const { userModel } = require("../../model/user.model")
 const bcrypt = require('bcryptjs')
-const secret_key = process.env.TOKEN_KEY
+const secret_key = "mysecretkey"
 const { generateToken } = require('../../middleware/auth')
 const mongoDbserviceUser = require("../../services/mongoDbService")({model: userModel})
 
