@@ -4,7 +4,6 @@ const { generateAdminToken, verifyAdminToken } = require('../../middleware/auth'
 const secret_key="mysecretkey"
 const nodemailer = require('nodemailer')
 
-
 exports.addAdmin = async (req, res) => {
     try {
         if (req.body.name === "") {
@@ -380,7 +379,4 @@ exports.setNewPassword = async (req, res) => {
         return res.send({ status: false, subCode: 400, message: error.message });
     }
 }
-
-
-
 
