@@ -1,4 +1,3 @@
-const { studentModel } = require("./student.model")
 const mongoose = require('mongoose')
 const batchSchema = mongoose.Schema(
     {
@@ -29,10 +28,13 @@ const batchSchema = mongoose.Schema(
         duration: {
             type: Number
         },
-        student: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref:studentModel,
-        }],
+        student: {
+            type: [{
+                name: { type: String },
+                studentId: { type: String },
+                phone: { type: String }
+            }]
+        },
         isActive: {
             type: Boolean,
             default: true

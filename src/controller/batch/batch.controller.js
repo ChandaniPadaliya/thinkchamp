@@ -112,7 +112,7 @@ exports.getOneBatch = async (req, res) => {
         // console.log(valid);
         if (valid) {
             const id = req.params._id
-            const data = await batchModel.findOne({ _id: id, isDelete: false }).populate([{path: "student", select: "_id phone name"}])
+            const data = await batchModel.findOne({ _id: id, isDelete: false })
             // console.log(data);
             if (!data) {
                 return res.send({ status: false, subCode: 400, message: "data not exist" })
@@ -137,7 +137,7 @@ exports.getAllBatch = async (req, res) => {
         const valid = await adminModel.findOne({ token: token, isDelete: false })
         // console.log(valid);
         if (valid) {
-            const course = await batchModel.find({ isDelete: false }).populate([{path: 'student', select: 'firstname _id phone'}]);
+            const course = await batchModel.find({ isDelete: false })
 
             // Filter the user based on isActive and isDelete conditions
             const adminData = [];
