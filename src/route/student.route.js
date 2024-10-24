@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post('/addStudent', singleUpload, addStudent)
 router.patch('/activeStudent/:_id', activeStudent)
-router.post('/editStudent', singleUpload, editStudent)
+router.post('/editStudent', editStudent)
 router.get('/getOneStudent/:_id', getOneStudent)
 router.get('/getAllStudent', getAllStudent)
 router.patch('/removeStudent/:_id', removeStudent)
@@ -14,6 +14,6 @@ router.post('/forgotPassword', singleUpload, forgotPassword)
 router.post('/setNewPassword', singleUpload, setNewPassword)
 router.post('/sendOTP', singleUpload, sendOTP)
 router.post('/verifyOtp', singleUpload, verifyOtp)
-router.post('/getAllStudentByCourseId', singleUpload, getAllStudentByCourseId)
+router.post('/getAllStudentByCourseId', getAllStudentByCourseId)
 
 module.exports = router

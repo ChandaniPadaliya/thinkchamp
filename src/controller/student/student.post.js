@@ -223,7 +223,7 @@ exports.getOneStudent = async (req, res) => {
         if (valid) {
             const id = req.params._id
             console.log('id: ', id);
-            const data = await studentModel.findOne({ _id: id, isDelete: false })
+            const data = await studentModel.findOne({ _id: id, isDelete: false }).populate([{path: "courseId", select: "courseName duration price title batchesCount thumbnail studentCount instructorCount image category mode batchStartDate isActive isDelete"}])
             console.log(data);
             if (!data) {
                 return res.send({ status: false, subCode: 400, message: "data not exist" })
@@ -249,7 +249,7 @@ exports.getAllStudent = async (req, res) => {
         const valid = await adminModel.findOne({ token: token, isDelete: false })
     //  console.log(valid);
         if (valid) {
-            const student = await studentModel.find({ isDelete: false });
+            const student = await studentModel.find({ isDelete: false }).populate([{path: "courseId", select: "courseName duration price title batchesCount thumbnail studentCount instructorCount image category mode batchStartDate isActive isDelete"}])
             // Filter the user based on isActive and isDelete conditions
             const adminData = [];
             const usersData = [];
@@ -290,7 +290,7 @@ exports.getAllStudent = async (req, res) => {
 
 exports.getAllStudentByCourseId = async (req, res) => {
     try {
-        const token = parseJwt(req.headers.authorization);
+        const token = req.headers.authorization;
         console.log(token);
         const valid = await adminModel.findOne({ token: token, isDelete: false })
         // console.log(valid);
@@ -344,7 +344,7 @@ exports.editStudent = async (req, res) => {
         // console.log(valid);
         if (valid) {
             const id = req.body.id
-            const file = req.files
+            // const file = req.files
             const content = await studentModel.findOne({ _id: id, isDelete: false })
             if (!content) {
                 return res.send({ status: false, subCode: 400, message: "data not exist" })

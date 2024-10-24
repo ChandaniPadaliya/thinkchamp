@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const {courseModel} = require("../model/course.model")
 const studentSchema = mongoose.Schema({
     firstName: {
         type: String,
@@ -54,10 +55,10 @@ const studentSchema = mongoose.Schema({
         type: String,
         default: ""
     },
-    courseId: {
-        type: String,
-        default: ""
-    },
+    courseId:[ {
+             type: mongoose.Schema.Types.ObjectId,
+             ref: courseModel
+    }],
     batchTime: {
         type: String,
         default: ""
