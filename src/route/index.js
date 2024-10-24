@@ -23,11 +23,11 @@ router.use('/users', userRoute)
 router.use("/file", file);
 
 // router.use('/homePage', homePageRoute)
-// router.use('/course', courseRoute)
+router.use('/course', courseRoute)
 // router.use('/instructor', instructorRoute)
 router.use('/student', studentRoute)
 router.use('/admin', adminRoute)
-// router.use('/batch', batchRoute)
+router.use('/batch', batchRoute)
 // router.use('/syllabus', syllabusRoute)
 // router.use('/quiz', quizRoute)
 // router.use('/syllabusCategory', syllabusCategoryRoute)

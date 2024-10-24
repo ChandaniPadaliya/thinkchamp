@@ -237,12 +237,8 @@ exports.loginUser = async (req, res) => {
         }
         const user = await userModel.findOne({ email: data.email });
         if (user) {
-            console.log('User found:', user);
-            console.log('Data.Password:', data.Password);
-            console.log('User.Password:', user.Password);
 
             const hash = bcrypt.compareSync(data.Password, user.Password);
-            console.log('Password comparison result:', hash);
 
             if (hash === true) {
                 // const updatedData = await userModel.findOneAndUpdate(
@@ -253,7 +249,6 @@ exports.loginUser = async (req, res) => {
 
                 const id = user._id;
                 const token = generateToken(id, secret_key);
-                console.log('Generated Token:', token);
 
                 const updatedUser = await userModel.findOneAndUpdate(
                     { email: user.email, isDelete: false },

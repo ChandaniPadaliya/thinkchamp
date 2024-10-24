@@ -164,8 +164,10 @@ exports.addStudent = async (req, res) => {
             // console.log(newEnrollmentNumber)
             // const enrollmentNo = newEnrollmentNumber
 
-            const data = { firstName, lastName, age, email, gender, dateOfBirth, admissionDate, password, enrollmentNo, fatherName, phone, courseName, courseId, batchTime, studentName, studentId, address, roleName, roleId, image, instructorId, instructorName, fullName }
+            const data = { firstName, lastName, age, email, gender, dateOfBirth, admissionDate, password, fatherName, phone, courseName, courseId, batchTime, studentName, studentId, address, roleName, roleId, image, instructorId, instructorName, fullName }
             const saveData = new studentModel(data)
+
+            await saveData.save()
             // await saveData.save()
             // const newEntry = {
             //     enrollmentNo: saveData.enrollmentNo,
@@ -173,7 +175,7 @@ exports.addStudent = async (req, res) => {
             //     studentId: saveData._id
             // }
             // const updatedEnrollments = await enrollmentModel.create(newEntry)
-            console.log(updatedEnrollments);
+            // console.log(updatedEnrollments);
             return res.send({ status: true, subCode: 200, message: "Student added successfully ", data: saveData })
         }
         return res.send({ status: false, subCode: 400, message: "Invalid user" })
@@ -214,14 +216,15 @@ exports.activeStudent = async (req, res) => {
 
 exports.getOneStudent = async (req, res) => {
     try {
-        const token = parseJwt(req.headers.authorization);
+        const token = req.headers.authorization;
         // console.log(token);
         const valid = await adminModel.findOne({ token: token, isDelete: false })
-        // console.log(valid);
+        console.log(valid);
         if (valid) {
             const id = req.params._id
+            console.log('id: ', id);
             const data = await studentModel.findOne({ _id: id, isDelete: false })
-            // console.log(data);
+            console.log(data);
             if (!data) {
                 return res.send({ status: false, subCode: 400, message: "data not exist" })
             }
@@ -466,14 +469,15 @@ exports.loginStudent = async (req, res) => {
         if (data.password === "") {
             return res.send({ status: false, subCode: 400, message: "Password is required" })
         }
-        const user = await studentModel.findOne({ email: data.email, password: data.password, isDelete: false });
+        const user = await studentModel.findOne({ email: data.email, password: data.password,  });
+        console.log('user: ', user);
 
         if (user) {
             console.log('User found:', user);
             console.log('Data.password:', data.password);
             console.log('User.password:', user.password);
 
-            // const hash = bcrypt.compareSync(data.password, user.password);
+            //              const hash = bcrypt.compareSync(data.password, user.password);
             // console.log('password comparison result:', hash);
 
             const id = user._id;
@@ -502,7 +506,7 @@ exports.loginStudent = async (req, res) => {
             });
         }
     } catch (err) {
-        console.error("Helper Err:", error);
+        console.error("Helper Err:", err);
         return res.send({ status: false, subCode: 400, message: err.message });
     }
 };
